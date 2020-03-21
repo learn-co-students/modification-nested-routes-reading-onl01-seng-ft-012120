@@ -8,6 +8,10 @@ class PostsController < ApplicationController
     end
   end
 
+  def new
+    @post = Post.new(author_id: params[:author_id])
+  end
+
   def show
     if params[:author_id]
       @post = Author.find(params[:author_id]).posts.find(params[:id])
@@ -39,6 +43,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :description)
+    params.require(:post).permit(:title, :description, :author_id)
   end
+  
 end
